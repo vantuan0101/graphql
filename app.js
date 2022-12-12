@@ -1,4 +1,4 @@
-const { ApolloServer, MockList } = require("@apollo/server");
+const { ApolloServer } = require("@apollo/server");
 const { startStandaloneServer } = require("@apollo/server/standalone");
 const typeDefs = require("./src/schema/schema");
 const resolver = require("./src/resolver/resolver");
