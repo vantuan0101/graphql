@@ -1,27 +1,46 @@
-const typeDefs = `#graphql
-#Type Query là định nghĩa những entry point đi vào schema
-#Định nghĩa những data mà clients có thể query trong schema
-type Query {
-  #Quey to get tracks  array for the homepage grid
-  #non-null Track và non-null list
-  tracksForHome : [Track!]! 
+const { gql } = require("apollo-server");
 
-}
-#A track iis a group oof Module that teaches about a specifiic topic
-    type Track {
-      id : ID!
-      #the track's tittle
-      title : String!
-      author : Author!
-      thumbnail : String
-      length : Int
-      modulesCount: Int
-    }
-    type Author {
-      id:ID!
-      name : String!
-      photo : String
-    }
+const typeDefs = gql`
+  #Type Query là định nghĩa những entry point đi vào schema
+  #Định nghĩa những data mà clients có thể query trong schema
+  type Query {
+    "Get tracks array for homepage grid"
+    tracksForHome: [Track!]!
+    track(id: ID!): Track
+  }
+
+  "A track is a group of Modules that teaches about a specific topic"
+  type Track {
+    id: ID!
+    "The track's title"
+    title: String!
+    "The track's main author"
+    author: Author!
+    "The track's main illustration to display in track card or track page detail"
+    thumbnail: String
+    "The track's approximate length to complete, in minutes"
+    length: Int
+    "The number of modules this track contains"
+    modulesCount: Int
+  }
+
+  "Author of a complete Track"
+  type Author {
+    id: ID!
+    "Author's first and last name"
+    name: String!
+    "Author's profile picture url"
+    photo: String
+  }
+  type Mutation {
+    incrementTrackViews(id: ID!): IncrementTrackViewsResponse!
+  }
+  type IncrementTrackViewsResponse {
+    code: Int!
+    success: Boolean!
+    message: String!
+    track: Track
+  }
 `;
 
 module.exports = typeDefs;

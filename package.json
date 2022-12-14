@@ -12,7 +12,7 @@
     "nodemon": "^2.0.20"
   },
   "scripts": {
-    "start": "nodemon --experimental-modules app.js"
+    "start": "nodemon app.js"
   },
   "name": "server",
   "main": "app.js",
